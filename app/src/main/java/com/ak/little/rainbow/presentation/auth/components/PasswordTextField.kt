@@ -1,4 +1,4 @@
-package com.ak.little.rainbow.presentation.login.components
+package com.ak.little.rainbow.presentation.auth.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.scaleIn
@@ -6,6 +6,7 @@ import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Password
 import androidx.compose.material.icons.rounded.Visibility
@@ -20,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 
@@ -29,7 +31,7 @@ fun PasswordTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
-    supportingText: String
+    supportingText: String?
 ) {
 
     var passVisible by remember { mutableStateOf(false) }
@@ -37,12 +39,15 @@ fun PasswordTextField(
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        supportingText = {
-            Text(
-                text = supportingText,
-                color = MaterialTheme.colorScheme.error
-            )
-        },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        supportingText = if (supportingText != null) {
+            {
+                Text(
+                    text = supportingText,
+                    color = MaterialTheme.colorScheme.error
+                )
+            }
+        } else null,
         leadingIcon = {
             Icon(
                 imageVector = Icons.Rounded.Password,

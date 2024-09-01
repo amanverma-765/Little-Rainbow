@@ -1,16 +1,12 @@
-package com.ak.little.rainbow.presentation.login.viewmodel
+package com.ak.little.rainbow.presentation.auth.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ak.little.rainbow.domain.repo.AdminAuthRepo
 import com.ak.little.rainbow.domain.usecase.AdminAuthUseCase
-import com.ak.little.rainbow.utils.ApiResponse
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.util.regex.Pattern
 
 
 class AdminLoginViewModel(
@@ -52,45 +48,25 @@ class AdminLoginViewModel(
     }
 
     private fun validateEmail() {
-        var emailErrorMsg = ""
-        val isEmailValidated: Boolean
-        val emailPattern = Pattern.compile(
-            "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
-        )
 
-        if (adminLoginUiState.value.email.isBlank()) {
-            emailErrorMsg = "Email cannot be empty"
-            isEmailValidated = false
-        } else if (emailPattern.matcher(adminLoginUiState.value.email).matches().not()) {
-            emailErrorMsg = "Invalid email address"
-            isEmailValidated = false
-        } else {
-            isEmailValidated = true
-        }
+        val emailResult = adminAuthUseCase.validateEmail.validate(adminLoginUiState.value.email)
 
         _adminLoginUiState.update { state ->
             state.copy(
-                emailErrorMsg = emailErrorMsg,
-                isEmailValidated = isEmailValidated
+                emailErrorMsg = emailResult.errorMessage,
+                isEmailValidated = emailResult.successful
             )
         }
     }
 
     private fun validatePass() {
-        var passErrorMsg = ""
-        val isPassValidated: Boolean
 
-        if (adminLoginUiState.value.password.isBlank()) {
-            passErrorMsg = "Password cannot be empty"
-            isPassValidated = false
-        } else {
-            isPassValidated = true
-        }
+        val passResult = adminAuthUseCase.validatePassword.validate(adminLoginUiState.value.password)
 
         _adminLoginUiState.update { state ->
             state.copy(
-                passErrorMsg = passErrorMsg,
-                isPassValidated = isPassValidated
+                passErrorMsg = passResult.errorMessage,
+                isPassValidated = passResult.successful
             )
         }
     }
@@ -118,7 +94,6 @@ class AdminLoginViewModel(
                         authStatusResponse = response
                     )
                 }
-                Log.e("TAG", "listenAuthStatus: $response")
             }
         }
     }

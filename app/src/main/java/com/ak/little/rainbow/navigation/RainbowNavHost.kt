@@ -1,6 +1,8 @@
 package com.ak.little.rainbow.navigation
 
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,8 +14,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ak.little.rainbow.presentation.dashboard.screen.DashboardScreen
-import com.ak.little.rainbow.presentation.login.screen.AdminLoginScreen
-import com.ak.little.rainbow.presentation.login.viewmodel.AdminLoginViewModel
+import com.ak.little.rainbow.presentation.auth.screen.AdminLoginScreen
+import com.ak.little.rainbow.presentation.auth.viewmodel.AdminLoginViewModel
+import com.ak.little.rainbow.presentation.dashboard.viewmodel.DashboardUiEvent
+import com.ak.little.rainbow.presentation.dashboard.viewmodel.DashboardViewModel
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -29,9 +33,9 @@ fun RainbowNavHost(
         navController = rootNavigator,
         startDestination = startDestination,
         enterTransition = { slideInHorizontally(tween(500)) { it } },
-        exitTransition = { slideOutHorizontally(tween(500)) { -it } },
+        exitTransition = { scaleOut(targetScale = .8f) + fadeOut() },
         popEnterTransition = { slideInHorizontally(tween(500)) { -it } },
-        popExitTransition = { slideOutHorizontally(tween(500)) { it } },
+        popExitTransition = { scaleOut(targetScale = 1.2f) + fadeOut() },
         modifier = modifier.fillMaxSize()
     ) {
 
@@ -44,13 +48,27 @@ fun RainbowNavHost(
                 uiState = adminLoginUiState,
                 uiEvent = adminLoginVm::onEvent,
                 navigateToDashboard = {
-                    rootNavigator.navigate(RainbowDestinations.Dashboard)
+                    rootNavigator.navigate(RainbowDestinations.Dashboard) {
+                        popUpTo(RainbowDestinations.AdminLogin) {
+                            inclusive = true
+                        }
+                    }
                 }
             )
         }
 
         composable<RainbowDestinations.Dashboard> {
-            DashboardScreen()
+
+            val dashboardVm = koinViewModel<DashboardViewModel>()
+            val dashboardUiState by dashboardVm.dashboardUiState.collectAsState()
+
+            DashboardScreen(
+                uiState = dashboardUiState,
+                uiEvent = dashboardVm::onEvent,
+                navigateToLogin = {
+                    rootNavigator.navigate(RainbowDestinations.AdminLogin)
+                }
+            )
         }
     }
 }

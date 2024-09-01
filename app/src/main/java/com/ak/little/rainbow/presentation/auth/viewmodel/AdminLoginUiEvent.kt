@@ -1,4 +1,4 @@
-package com.ak.little.rainbow.presentation.login.viewmodel
+package com.ak.little.rainbow.presentation.auth.viewmodel
 
 
 sealed interface AdminLoginUiEvent {

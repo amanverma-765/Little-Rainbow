@@ -3,6 +3,8 @@ package com.ak.little.rainbow.data.remote.supabase
 import com.ak.little.rainbow.data.model.SupabaseAuthStatus
 import com.ak.little.rainbow.utils.ApiResponse
 import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.exceptions.BadRequestRestException
+import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.gotrue.SessionStatus
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
@@ -27,6 +29,12 @@ class SupabaseAuthManager(
 
                 emit(ApiResponse.Success(Unit))
 
+            } catch (e: BadRequestRestException) {
+                e.printStackTrace()
+                emit(ApiResponse.Error(e.description))
+            } catch (e: RestException) {
+                e.printStackTrace()
+                emit(ApiResponse.Error(e.description))
             } catch (e: Exception) {
                 e.printStackTrace()
                 emit(ApiResponse.Error(e.message))
@@ -47,6 +55,12 @@ class SupabaseAuthManager(
 
                 emit(ApiResponse.Success(Unit))
 
+            } catch (e: BadRequestRestException) {
+                e.printStackTrace()
+                emit(ApiResponse.Error(e.description))
+            } catch (e: RestException) {
+                e.printStackTrace()
+                emit(ApiResponse.Error(e.description))
             } catch (e: Exception) {
                 e.printStackTrace()
                 emit(ApiResponse.Error(e.message))
@@ -62,6 +76,12 @@ class SupabaseAuthManager(
                 supabaseClient.auth.signOut()
                 emit(ApiResponse.Success(Unit))
 
+            } catch (e: BadRequestRestException) {
+                e.printStackTrace()
+                emit(ApiResponse.Error(e.description))
+            } catch (e: RestException) {
+                e.printStackTrace()
+                emit(ApiResponse.Error(e.description))
             } catch (e: Exception) {
                 e.printStackTrace()
                 emit(ApiResponse.Error(e.message))
@@ -86,6 +106,12 @@ class SupabaseAuthManager(
                     }
                 }
 
+            } catch (e: BadRequestRestException) {
+                e.printStackTrace()
+                emit(ApiResponse.Error(e.description))
+            } catch (e: RestException) {
+                e.printStackTrace()
+                emit(ApiResponse.Error(e.description))
             } catch (e: Exception) {
                 e.printStackTrace()
                 emit(ApiResponse.Error(e.message))

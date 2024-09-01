@@ -7,11 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.ak.little.rainbow.navigation.RainbowDestinations
 import com.ak.little.rainbow.navigation.RainbowNavHost
-import com.ak.little.rainbow.presentation.login.screen.AdminLoginScreen
 import com.ak.little.rainbow.theme.LittleRainbowTheme
 import org.koin.androidx.compose.KoinAndroidContext
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -28,7 +26,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier
                             .fillMaxSize()
                             .background(MaterialTheme.colorScheme.background),
-                        startDestination = RainbowDestinations.AdminLogin
+                        startDestination = RainbowDestinations.Dashboard
                     )
                 }
             }
