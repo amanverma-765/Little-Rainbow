@@ -2,27 +2,24 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
-    //  Custom Added
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrains.kotlinx.serialization)
-    alias(libs.plugins.compose.compiler)
 }
 
 android {
-    namespace = "com.ak.little.rainbow"
-    compileSdk = 34
+    namespace = "com.ark.little.rainbow"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.ak.little.rainbow"
+        applicationId = "com.ark.little.rainbow"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
         buildConfigField(
@@ -36,9 +33,7 @@ android {
             value = properties.getProperty("supabaseApiKey")
         )
     }
-    buildFeatures {
-        buildConfig = true
-    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -46,26 +41,18 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
-    }
-    composeCompiler {
-        enableStrongSkippingMode = true
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
+        buildConfig = true
     }
 }
 
@@ -95,9 +82,9 @@ dependencies {
     // Supabase
     implementation(platform(libs.supabase.bom))
     implementation(libs.supabase.postgrest.kt)
-    implementation(libs.supabase.gotrue.kt)
+    implementation(libs.supabase.auth.kt)
     // Ktor
-    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.okhttp)
     // Ktx - Serialization
     implementation(libs.kotlinx.serialization.json)
     // Material Icons
@@ -106,5 +93,4 @@ dependencies {
     implementation(libs.androidx.ui.text.google.fonts)
     // Compose Navigation
     implementation(libs.androidx.navigation.compose)
-
 }
