@@ -1,4 +1,4 @@
-package com.ark.little.rainbow.presentation.auth.viewmodel
+package com.ark.little.rainbow.presentation.features.auth.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -61,7 +61,8 @@ class AdminLoginViewModel(
 
     private fun validatePass() {
 
-        val passResult = adminAuthUseCase.validatePassword.validate(adminLoginUiState.value.password)
+        val passResult =
+            adminAuthUseCase.validatePassword.validate(adminLoginUiState.value.password)
 
         _adminLoginUiState.update { state ->
             state.copy(

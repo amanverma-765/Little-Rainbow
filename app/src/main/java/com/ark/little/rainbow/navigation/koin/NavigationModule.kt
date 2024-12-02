@@ -1,8 +1,8 @@
 package com.ark.little.rainbow.navigation.koin
 
-import com.ark.little.rainbow.presentation.auth.viewmodel.AdminLoginViewModel
-import com.ark.little.rainbow.presentation.dashboard.viewmodel.DashboardViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
+import com.ark.little.rainbow.presentation.features.auth.viewmodel.AdminLoginViewModel
+import com.ark.little.rainbow.presentation.features.dashboard.viewmodel.DashboardViewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 val navigationModule = module {
@@ -12,7 +12,10 @@ val navigationModule = module {
     }
 
     viewModel {
-        DashboardViewModel(adminAuthUseCase = get())
+        DashboardViewModel(
+            adminAuthUseCase = get(),
+            databaseUseCase = get()
+        )
     }
 
 }

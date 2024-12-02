@@ -6,7 +6,6 @@ sealed interface SupabaseAuthStatus {
 
     data class Authenticated(val metadata: JsonObject?) : SupabaseAuthStatus
     data object NotAuthenticated : SupabaseAuthStatus
-    data object LoadingFromStorage : SupabaseAuthStatus
     data object NetworkError : SupabaseAuthStatus
 
 }

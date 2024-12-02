@@ -21,12 +21,10 @@ class SupabaseAuthManager(
             try {
 
                 emit(ApiResponse.Loading)
-
                 supabaseClient.auth.signInWith(provider = OTP) {
                     this.email = email
                     this.createUser = false
                 }
-
                 emit(ApiResponse.Success(Unit))
 
             } catch (e: BadRequestRestException) {
@@ -47,12 +45,10 @@ class SupabaseAuthManager(
             try {
 
                 emit(ApiResponse.Loading)
-
                 supabaseClient.auth.signInWith(provider = Email) {
                     this.email = email
                     this.password = password
                 }
-
                 emit(ApiResponse.Success(Unit))
 
             } catch (e: BadRequestRestException) {
@@ -106,6 +102,7 @@ class SupabaseAuthManager(
                                 SupabaseAuthStatus.NotAuthenticated
                             )
                         )
+
                         is SessionStatus.Initializing -> Unit
                         is SessionStatus.RefreshFailure -> Unit
                     }

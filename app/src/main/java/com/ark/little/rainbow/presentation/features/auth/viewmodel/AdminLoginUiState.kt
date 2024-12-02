@@ -1,4 +1,4 @@
-package com.ark.little.rainbow.presentation.auth.viewmodel
+package com.ark.little.rainbow.presentation.features.auth.viewmodel
 
 import com.ark.little.rainbow.domain.model.AuthStatus
 import com.ark.little.rainbow.utils.ApiResponse

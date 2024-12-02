@@ -7,9 +7,8 @@ object AuthStatusMapper {
 
     fun SupabaseAuthStatus.toAuthStatus(): AuthStatus {
         return when (this) {
-            is SupabaseAuthStatus.Authenticated -> AuthStatus.Authenticated(metadata)
+            is SupabaseAuthStatus.Authenticated -> AuthStatus.Authenticated(this.metadata)
             is SupabaseAuthStatus.NotAuthenticated -> AuthStatus.NotAuthenticated
-            is SupabaseAuthStatus.LoadingFromStorage,
             is SupabaseAuthStatus.NetworkError -> AuthStatus.NotAuthenticated
         }
     }

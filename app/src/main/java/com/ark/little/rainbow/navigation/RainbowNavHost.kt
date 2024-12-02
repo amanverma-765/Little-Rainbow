@@ -12,11 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.ark.little.rainbow.navigation.RainbowDestinations
-import com.ark.little.rainbow.presentation.dashboard.screen.DashboardScreen
-import com.ark.little.rainbow.presentation.auth.screen.AdminLoginScreen
-import com.ark.little.rainbow.presentation.auth.viewmodel.AdminLoginViewModel
-import com.ark.little.rainbow.presentation.dashboard.viewmodel.DashboardViewModel
+import com.ark.little.rainbow.presentation.features.auth.screen.AdminLoginScreen
+import com.ark.little.rainbow.presentation.features.auth.viewmodel.AdminLoginViewModel
+import com.ark.little.rainbow.presentation.features.dashboard.screen.DashboardScreen
+import com.ark.little.rainbow.presentation.features.dashboard.viewmodel.DashboardViewModel
 import org.koin.androidx.compose.koinViewModel
 
 

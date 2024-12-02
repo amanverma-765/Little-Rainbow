@@ -1,4 +1,4 @@
-package com.ark.little.rainbow.presentation.auth.screen
+package com.ark.little.rainbow.presentation.features.auth.screen
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
@@ -33,12 +33,12 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.ark.little.rainbow.R
 import com.ark.little.rainbow.domain.model.AuthStatus
-import com.ark.little.rainbow.presentation.auth.components.EmailTextField
-import com.ark.little.rainbow.presentation.auth.components.PasswordTextField
-import com.ark.little.rainbow.presentation.auth.viewmodel.AdminLoginUiEvent
-import com.ark.little.rainbow.presentation.auth.viewmodel.AdminLoginUiState
 import com.ark.little.rainbow.presentation.components.ButtonState
 import com.ark.little.rainbow.presentation.components.LoadingProgressButton
+import com.ark.little.rainbow.presentation.features.auth.components.EmailTextField
+import com.ark.little.rainbow.presentation.features.auth.components.PasswordTextField
+import com.ark.little.rainbow.presentation.features.auth.viewmodel.AdminLoginUiEvent
+import com.ark.little.rainbow.presentation.features.auth.viewmodel.AdminLoginUiState
 import com.ark.little.rainbow.utils.ApiResponse
 import com.ark.little.rainbow.utils.toast
 
@@ -70,6 +70,7 @@ fun AdminLoginScreen(
             is ApiResponse.Error -> {
                 context.toast("Something went wrong")
             }
+
             is ApiResponse.Success -> {
                 when (response.data) {
                     is AuthStatus.Authenticated -> {
@@ -95,6 +96,7 @@ fun AdminLoginScreen(
                     errorMsg.value = response.message
                 }
             }
+
             is ApiResponse.Success -> {
                 navigateToDashboard()
             }

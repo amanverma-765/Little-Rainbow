@@ -2,6 +2,7 @@ package com.ark.little.rainbow.data.koin
 
 import com.ark.little.rainbow.BuildConfig
 import com.ark.little.rainbow.data.remote.supabase.SupabaseAuthManager
+import com.ark.little.rainbow.data.remote.supabase.SupabaseDbManager
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.createSupabaseClient
@@ -29,5 +30,6 @@ val remoteModule = module {
     }
 
     single { SupabaseAuthManager(supabaseClient = get()) }
+    single { SupabaseDbManager(supabaseClient = get()) }
 
 }

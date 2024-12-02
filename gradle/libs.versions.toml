@@ -1,21 +1,21 @@
 [versions]
 agp = "8.7.2"
-kotlin = "2.0.21"
+kotlin = "2.1.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
-composeBom = "2024.10.01"
+composeBom = "2024.11.00"
 # Custom Added
 kotlinxSerializationJson = "1.7.3"
 materialIconsExtendedAndroid = "1.7.5"
-navigationCompose = "2.8.3"
-koinBom = "3.6.0-Beta4"
+navigationCompose = "2.8.4"
+koinBom = "4.1.0-Beta1"
 coreSplashscreen = "1.0.1"
 ktor = "3.0.0"
-supabaseBom = "3.0.1"
+supabaseBom = "3.0.2"
 uiTextGoogleFonts = "1.7.5"
 datastorePreferences = "1.1.1"
 
@@ -52,7 +52,6 @@ supabase-bom = { module = "io.github.jan-tennert.supabase:bom", version.ref = "s
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
-
 
 
 
